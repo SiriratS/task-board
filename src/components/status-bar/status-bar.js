@@ -19,11 +19,17 @@ class StatusBar extends Component {
 	}  
 
   handleChange(state) {
+    if(state.deleteId) {
+      this.setState({ deleteId: state.deleteId }, this.updateTaskListCount);
+      return;
+    }
+
     this.setState({ task: state.task }, this.updateTaskListCount);
   }
 
   get displayTaskItem() {
     return this.props.taskList
+        .sort((asc, desc) => desc.id - asc.id)
         .map((task, i) => {
           return <TaskItem key={i} task={task} handleCounter={this.handleChange} />
         });

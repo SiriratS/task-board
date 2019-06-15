@@ -11,8 +11,9 @@ class TaskItem extends Component {
       task: props.task
     }
 
-    this.handleStatusChange = this.handleStatusChange.bind(this);
-    this.handleModeChange = this.handleModeChange.bind(this);
+    this.toggleStatus = this.toggleStatus.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.onDelete = this.onDelete.bind(this);
     this.input = React.createRef();
   }
 
@@ -24,15 +25,14 @@ class TaskItem extends Component {
 		this.props.handleCounter(this.state);
 	}  
 
-	handleStatusChange() {
+	toggleStatus() {
     this.task.isDone = !this.task.isDone;
     this.task.isEdit = false;
 		this.setState({ task: this.task }, this.updateTaskCount);
   }
   
-	handleModeChange() {
+	toggleEditMode() {
     this.task.isEdit = !this.task.isEdit;
-
     if(!this.task.isEdit) {
       this.task.name = this.input.current.value;
     }
@@ -40,20 +40,35 @@ class TaskItem extends Component {
 		this.setState({ task: this.task }, this.updateTaskCount);
   }  
 
+  onDelete() {
+    const isConfirm = window.confirm('Are you sure you wish to delete this item?');
+    
+    if(isConfirm) {
+      this.setState({ deleteId: this.task.id }, this.updateTaskCount);  
+    }
+  }
+
+  get cardName() {
+    if (this.task.isEdit) {
+      return (
+        <input type="text" className="form-control card-title"  
+          ref={this.input} 
+          readOnly={!this.task.isEdit} 
+          defaultValue={this.task.name}>         
+        </input>
+      );
+    }
+    return <label className="form-control card-title">{this.task.name}</label>;
+  }
+
   render() {
     return (
       <div className="card">
+        <button onClick={this.onDelete}><FontAwesomeIcon icon="times" /></button>
         <div className="card-body">
-          {this.task.name}
           <div className="input-group flex-nowrap">
-            <input type="text" className="form-control card-title" 
-              ref={this.input}
-              readOnly={!this.task.isEdit}  
-              defaultValue={this.props.task.name}
-              value={this.props.task.name}
-            >
-            </input>
-            <div className="input-group-prepend" onClick={this.handleModeChange}>
+            { this.cardName }
+            <div className="input-group-prepend" onClick={this.toggleEditMode}>
               <span className="input-group-text">
                 <FontAwesomeIcon icon={ this.task.isEdit ? "save" : "edit" } />
               </span>
@@ -63,7 +78,7 @@ class TaskItem extends Component {
             <input className="form-check-input" 
               type="checkbox" 
               checked={this.task.isDone} 
-              onChange={this.handleStatusChange}></input>
+              onChange={this.toggleStatus}></input>
             <label className="form-check-label">
               Done
             </label>

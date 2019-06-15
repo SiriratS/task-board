@@ -25,30 +25,12 @@ class Board extends Component {
         name: 'Plan',
         isDone: true,
         isEdit: false
-      },
-      {
-        id: 4,
-        name: '',
-        isDone: false,
-        isEdit: true
-      }    
+      } 
     ]
     }
 
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(state) {
-    this._updateTask(state.task);
-
-    this.setState({ 
-      taskList: this.taskList
-    });
-  }
-
-  _updateTask(updateTask) {
-    const index = this.taskList.findIndex((task) => task.id === updateTask.id);
-    this.taskList[index] = updateTask;
+    this.createTask = this.createTask.bind(this);
   }
 
   get taskList() {
@@ -61,6 +43,47 @@ class Board extends Component {
 
   get doneTask() {
     return this.state.taskList.filter((task) => task.isDone);
+  }  
+
+  handleChange(state) {
+    if(state.deleteId) {
+      this.deleteTask(state.deleteId)
+      return;
+    }
+    this.updateTask(state.task);
+  }
+
+  deleteTask(deleteId) {
+    const index = this.taskList.findIndex((task) => task.id === deleteId);
+    this.taskList.splice(index, 1); 
+
+    this.setState({ 
+      taskList: this.taskList
+    });
+  }
+
+  updateTask(updateTask) {
+    const index = this.taskList.findIndex((task) => task.id === updateTask.id);
+    this.taskList[index] = updateTask;
+
+    this.setState({ 
+      taskList: this.taskList
+    });
+  }
+
+  createTask() {
+    let totalTask = this.taskList.length;
+
+    this.taskList.push({
+      id: totalTask + 1,
+      name: '',
+      isDone: false,
+      isEdit: true
+    });
+    
+    this.setState({ 
+      taskList: this.taskList
+    });    
   }
 
   render() {
@@ -68,7 +91,7 @@ class Board extends Component {
       <div id="board" className="container-fluid">
         <div className="row">
         <div className="col-sm-12">
-            Board
+            To Do List Board
           </div>
           <div className="col-sm-12">
             <ProgressBar 
@@ -78,6 +101,11 @@ class Board extends Component {
           </div>
           <div className="col-sm-12">
             <div className="container">
+              <div className="row">
+                <div className="col-sm-12">
+                  <button type="button" className="btn btn-primary" onClick={this.createTask}>Add new Task</button>
+                </div>
+              </div>
               <div className="row">
                 <StatusBar 
                   title="To Do"
