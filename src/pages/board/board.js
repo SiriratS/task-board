@@ -11,18 +11,28 @@ class Board extends Component {
       taskList: [{
         id: 1,
         name: 'Create UI',
-        isDone: false
+        isDone: false,
+        isEdit: false
       },
       {
         id: 2,
         name: 'Adjust Style',
-        isDone: false
+        isDone: false,
+        isEdit: false
       },
       {
         id: 3,
         name: 'Plan',
-        isDone: true
-      }]
+        isDone: true,
+        isEdit: false
+      },
+      {
+        id: 4,
+        name: '',
+        isDone: false,
+        isEdit: true
+      }    
+    ]
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,12 +48,7 @@ class Board extends Component {
 
   _updateTask(updateTask) {
     const index = this.taskList.findIndex((task) => task.id === updateTask.id);
-
-    this.taskList[index] = {
-      id: updateTask.id, 
-      name: updateTask.name,
-      isDone: updateTask.isDone 
-    };
+    this.taskList[index] = updateTask;
   }
 
   get taskList() {

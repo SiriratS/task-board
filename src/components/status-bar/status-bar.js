@@ -23,9 +23,10 @@ class StatusBar extends Component {
   }
 
   get displayTaskItem() {
-    return this.props.taskList.map((task, i) => {
-      return <TaskItem key={i} task={task} handleCounter={this.handleChange} />
-    });
+    return this.props.taskList
+        .map((task, i) => {
+          return <TaskItem key={i} task={task} handleCounter={this.handleChange} />
+        });
   }
 
   render() {
