@@ -6,26 +6,56 @@ import './board.css';
 class Board extends Component {
   constructor() {
     super();
-    this.taskList = [{
-      name: 'Create UI',
-      isDone: false
-    },
-    {
-      name: 'Adjust Style',
-      isDone: false
-    },
-    {
-      name: 'Plan',
-      isDone: true
-    }];
+
+    this.state = {
+      taskList: [{
+        id: 1,
+        name: 'Create UI',
+        isDone: false
+      },
+      {
+        id: 2,
+        name: 'Adjust Style',
+        isDone: false
+      },
+      {
+        id: 3,
+        name: 'Plan',
+        isDone: true
+      }]
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(state) {
+    this._updateTask(state.task);
+
+    this.setState({ 
+      taskList: this.taskList
+    });
+  }
+
+  _updateTask(updateTask) {
+    const index = this.taskList.findIndex((task) => task.id === updateTask.id);
+
+    this.taskList[index] = {
+      id: updateTask.id, 
+      name: updateTask.name,
+      isDone: updateTask.isDone 
+    };
+  }
+
+  get taskList() {
+    return this.state.taskList;
   }
 
   get toDoTask() {
-    return this.taskList.filter((task) => !task.isDone);
+    return this.state.taskList.filter((task) => !task.isDone);
   }
 
   get doneTask() {
-    return this.taskList.filter((task) => task.isDone);
+    return this.state.taskList.filter((task) => task.isDone);
   }
 
   render() {
@@ -48,11 +78,13 @@ class Board extends Component {
                   title="To Do"
                   grid="6"
                   taskList={this.toDoTask}
+                  handleCounter={this.handleChange}
                 />
                 <StatusBar 
                   title="Done"
                   grid="6"
                   taskList={this.doneTask}
+                  handleCounter={this.handleChange}
                 />
               </div>              
             </div>
