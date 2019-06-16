@@ -1,0 +1,11 @@
+.progress-bar-container {
+    align-self: flex-end;
+    max-width: 20rem;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.progress-bar-container .title {
+    margin: 0.5rem 0;
+    text-align: right;
+}

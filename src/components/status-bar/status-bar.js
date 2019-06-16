@@ -37,8 +37,8 @@ class StatusBar extends Component {
 
   render() {
     return (
-      <div className={`col-sm-${ this.grid }`} >
-        <div className="alert alert-secondary">
+      <div className={`status-bar col-sm-${ this.grid }`} >
+        <div className="alert status-bar-title">
           { this.title }
         </div>
         { this.displayTaskItem }     

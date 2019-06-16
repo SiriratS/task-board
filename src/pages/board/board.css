@@ -1,5 +1,23 @@
+
 #board {
-  text-align: center;
-  background-color: black;
-  color: white;
+  height: 100vh;
+}
+
+#board .board-name {
+  margin-top: 0.5rem;
+}
+
+#board .board-breadcrumb {
+  padding: 0.5rem;
+  border-bottom: 0.5rem solid #007bff;
+}
+
+#board .board-control-panel {
+  padding: 0.5rem;
+}
+
+#board .board-body {
+  padding: 1rem;
+  background-color: #007bff;
+  border-radius: 0.2rem;
 }

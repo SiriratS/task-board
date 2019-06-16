@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './progress-bar.css';
 
 class ProgressBar extends Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class ProgressBar extends Component {
 
   render() {
     return (
-      <div className="container">
-        <p>In Progress {this.percent}%</p>
+      <div className="progress-bar-container">
+        <p className="title">In Progress {this.percent}%</p>
         <div className="progress">
           <div className="progress-bar progress-bar-striped progress-bar-animated" 
             style={{ width: this.percent + '%' }}>                
