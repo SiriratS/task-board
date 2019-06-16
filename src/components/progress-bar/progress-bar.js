@@ -4,6 +4,7 @@ import './progress-bar.css';
 class ProgressBar extends Component {
   constructor(props) {
     super(props);
+    
     this.props = props;
   }
 

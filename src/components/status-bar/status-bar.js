@@ -7,10 +7,6 @@ class StatusBar extends Component {
     super(props);
 
     this.state = {};
-
-    this.grid = props.grid;
-    this.title = props.title;
-
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -37,9 +33,9 @@ class StatusBar extends Component {
 
   render() {
     return (
-      <div className={`status-bar col-sm-${ this.grid }`} >
+      <div className={`status-bar col-sm-${ this.props.grid }`} >
         <div className="alert status-bar-title">
-          { this.title }
+          { this.props.title }
         </div>
         { this.displayTaskItem }     
       </div>

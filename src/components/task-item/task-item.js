@@ -28,11 +28,13 @@ class TaskItem extends Component {
 	toggleStatus() {
     this.task.isDone = !this.task.isDone;
     this.task.isEdit = false;
+    
 		this.setState({ task: this.task }, this.updateTaskCount);
   }
   
 	toggleEditMode() {
     this.task.isEdit = !this.task.isEdit;
+
     if(!this.task.isEdit) {
       this.task.name = this.input.current.value;
     }
@@ -51,21 +53,26 @@ class TaskItem extends Component {
   get cardName() {
     if (this.task.isEdit) {
       return (
-        <input type="text" className="form-control card-title"  
+        <input type="text" className="form-control task-name"  
           ref={this.input} 
           readOnly={!this.task.isEdit} 
           defaultValue={this.task.name}>         
         </input>
       );
     }
-    return <label className="form-control card-title">{this.task.name}</label>;
+    return <label className="form-control task-name">{this.task.name}</label>;
   }
 
   render() {
     return (
-      <div className="card">
-        <button onClick={this.onDelete}><FontAwesomeIcon icon="times" /></button>
-        <div className="card-body">
+      <div className="task card">
+        <button 
+          className="btn btn-delete"
+          onClick={this.onDelete}
+        >
+            <FontAwesomeIcon icon="times" />
+        </button>
+        <div className="card-body task-body">
           <div className="input-group flex-nowrap">
             { this.cardName }
             <div className="input-group-prepend" onClick={this.toggleEditMode}>

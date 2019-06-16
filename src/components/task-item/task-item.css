@@ -1,4 +1,29 @@
-.card {
-    color: black;
-    text-align: left;
+.task {
+    margin-bottom: 0.5rem;
+    border-radius: 0 !important;
+    border: 0 !important;
+}
+
+.task:last-child {
+    margin-bottom: 0rem;
+}
+
+.task .btn-delete {
+    padding: 0rem 0.5rem;
+    width: 2rem;
+    align-self: flex-end;
+}
+
+.task .task-body {
+    padding: 1rem;
+    border-top: 0.05rem solid gray;
+    border-bottom: 0.3rem solid gray;
+}
+
+.task .form-check {
+    margin-top:0.5rem;
+}
+
+.task label.task-name {
+    background-color: #e9ecef;
 }

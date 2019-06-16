@@ -1,7 +1,21 @@
+.status-bar {
+    margin-bottom: 1rem;
+}
+
+.status-bar:last-child {
+    margin-bottom: 0rem;
+}
+
 .status-bar .status-bar-title {
     background: white;
     border-radius: 0;
     border-bottom: 0.3rem solid #d1ecf1;
     font-weight: bold;
     padding: 0.5rem 1rem;
+}
+
+@media (min-width: 576px) {
+    .status-bar {
+        margin-bottom: 0rem;
+    } 
 }
